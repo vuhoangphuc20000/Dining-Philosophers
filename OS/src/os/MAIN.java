@@ -24,8 +24,8 @@ public class MAIN extends javax.swing.JFrame {
     /**
      * Creates new form MAIN
      */
-    public  TrietGia [] trietGia = new TrietGia[5];
-    public  Dia[] dia = new Dia[5];
+    public  Philosopher [] Phil = new Philosopher[5];
+    public  Chopstick[] chop = new Chopstick[5];
     public  Panel panel = new Panel();
     public MAIN() {
         initComponents();
@@ -34,15 +34,15 @@ public class MAIN extends javax.swing.JFrame {
     }
     public void start(){
         for(int i=0;i < 5;i++)
-            dia[i] = new Dia(panel,i);
+            chop[i] = new Chopstick(panel,i);
         for(int i=0;i<5;i++){
-            trietGia[i] = new TrietGia(panel,textArea1,i,dia[(i-1+5)%5],dia[i]);
-            trietGia[i].start();
+            Phil[i] = new Philosopher(panel,textArea1,i,chop[(i-1+5)%5],chop[i]);
+            Phil[i].start();
     }
     }
     
     public void stop(){
-        for(int i=0;i<5;i++) trietGia[i].interrupt();
+        for(int i=0;i<5;i++) Phil[i].interrupt();
     }
     /**
      * This method is called from within the constructor to initialize the form.

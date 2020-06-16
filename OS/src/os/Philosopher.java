@@ -13,43 +13,43 @@ import javax.swing.JTextArea;
  *
  * @author Admin
  */
-public class TrietGia extends Thread {
+public class Philosopher extends Thread {
 
     private int id;
-    private Dia trai;
-    private Dia phai;
+    private Chopstick left;
+    private Chopstick right;
     private Panel panel;
     private static Random rd = new Random();
     private TextArea jt;
 
-    public TrietGia(Panel panel,TextArea jt, int id, Dia trai, Dia phai) {
+    public Philosopher(Panel panel,TextArea jt, int id, Chopstick trai, Chopstick phai) {
         this.panel = panel;
         this.jt = jt;
         this.id = id;
-        this.trai = trai;
-        this.phai = phai;
+        this.left = trai;
+        this.right = phai;
     }
 
     public void Wait() throws InterruptedException {
         if(id % 2 == 0) {
                 panel.drawState(id, 1);
                 //System.out.println("Triết gia "+id+" đói");
-                trai.layDia();
+                left.takeChop();
                 if(id != 2)panel.drawState(id, 3); else panel.drawState(id, 2);
                 //System.out.println("Triết gia "+id+" lấy dĩa trái");
                 sleep(1000);
-                phai.layDia();
+                right.takeChop();
                 panel.drawState(id, 4);
                 //System.out.println("Triết gia "+id+" lấy đc 2 dĩa");
             }
         else {
             panel.drawState(id, 1);
             //System.out.println("Triết gia "+id+" đói");
-            phai.layDia();
+            right.takeChop();
             if(id != 3)panel.drawState(id, 2); else panel.drawState(id, 3);
             //System.out.println("Triết gia "+id+" lấy dĩa phải");
             sleep(1000);
-            trai.layDia();     
+            left.takeChop();     
             panel.drawState(id, 4);
             //System.out.println("Triết gia "+id+" lấy đc 2 dĩa");
             
@@ -57,8 +57,8 @@ public class TrietGia extends Thread {
     }
 
     public void Signal() {
-        trai.traDia();
-        phai.traDia();
+        left.returnChop();
+        right.returnChop();
         //System.out.println("Triết gia "+id+" ăn xong");
 
     }

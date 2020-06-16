@@ -59,6 +59,8 @@ public class Panel extends javax.swing.JPanel {
         g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.drawImage(buff_img, null, 0, 0);
+        g2.setColor(Color.DARK_GRAY);
+        g2.drawRect(0, 0, 795, 499);
     }
 
     @Override
